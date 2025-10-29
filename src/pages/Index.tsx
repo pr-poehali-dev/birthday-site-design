@@ -4,17 +4,17 @@ const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const leftVideos = [
-    "https://cdn.coverr.co/videos/coverr-cinematic-view-of-a-man-walking-3787/1080p.mp4",
-    "https://cdn.coverr.co/videos/coverr-a-person-walking-on-a-beach-6323/1080p.mp4",
-    "https://cdn.coverr.co/videos/coverr-aerial-view-of-a-forest-5234/1080p.mp4",
-    "https://cdn.coverr.co/videos/coverr-city-traffic-at-night-4782/1080p.mp4",
+    "/videos-left/video1.mp4",
+    "/videos-left/video2.mp4",
+    "/videos-left/video3.mp4",
+    "/videos-left/video4.mp4",
   ];
 
   const rightVideos = [
-    "https://cdn.coverr.co/videos/coverr-aerial-view-of-a-city-at-night-4516/1080p.mp4",
-    "https://cdn.coverr.co/videos/coverr-mountain-landscape-5621/1080p.mp4",
-    "https://cdn.coverr.co/videos/coverr-ocean-waves-4123/1080p.mp4",
-    "https://cdn.coverr.co/videos/coverr-sunset-sky-3456/1080p.mp4",
+    "/videos-right/video1.mp4",
+    "/videos-right/video2.mp4",
+    "/videos-right/video3.mp4",
+    "/videos-right/video4.mp4",
   ];
 
   useEffect(() => {
@@ -35,6 +35,10 @@ const Index = () => {
                   loop
                   muted
                   playsInline
+                  onError={(e) => {
+                    const target = e.target as HTMLVideoElement;
+                    target.style.display = 'none';
+                  }}
                 >
                   <source src={videoSrc} type="video/mp4" />
                 </video>
@@ -95,6 +99,10 @@ const Index = () => {
                   loop
                   muted
                   playsInline
+                  onError={(e) => {
+                    const target = e.target as HTMLVideoElement;
+                    target.style.display = 'none';
+                  }}
                 >
                   <source src={videoSrc} type="video/mp4" />
                 </video>
