@@ -3,6 +3,20 @@ import { useEffect, useState } from 'react';
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const leftVideos = [
+    "https://cdn.coverr.co/videos/coverr-cinematic-view-of-a-man-walking-3787/1080p.mp4",
+    "https://cdn.coverr.co/videos/coverr-a-person-walking-on-a-beach-6323/1080p.mp4",
+    "https://cdn.coverr.co/videos/coverr-aerial-view-of-a-forest-5234/1080p.mp4",
+    "https://cdn.coverr.co/videos/coverr-city-traffic-at-night-4782/1080p.mp4",
+  ];
+
+  const rightVideos = [
+    "https://cdn.coverr.co/videos/coverr-aerial-view-of-a-city-at-night-4516/1080p.mp4",
+    "https://cdn.coverr.co/videos/coverr-mountain-landscape-5621/1080p.mp4",
+    "https://cdn.coverr.co/videos/coverr-ocean-waves-4123/1080p.mp4",
+    "https://cdn.coverr.co/videos/coverr-sunset-sky-3456/1080p.mp4",
+  ];
+
   useEffect(() => {
     setIsLoaded(true);
   }, []);
@@ -10,18 +24,24 @@ const Index = () => {
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-[#0a0a0a]">
       <div className="absolute inset-0 flex">
-        <div className="relative w-1/3 h-full overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/90 z-10" />
-          <video
-            className="w-full h-full object-cover"
-            autoPlay
-            loop
-            muted
-            playsInline
-          >
-            <source src="https://cdn.coverr.co/videos/coverr-cinematic-view-of-a-man-walking-3787/1080p.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-black/30 z-5" />
+        <div className="relative w-1/3 h-full overflow-y-auto overflow-x-hidden scrollbar-hide">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/90 z-10 pointer-events-none" />
+          <div className="flex flex-col gap-4 p-4">
+            {leftVideos.map((videoSrc, index) => (
+              <div key={index} className="relative aspect-[9/16] w-full overflow-hidden rounded-sm">
+                <video
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                >
+                  <source src={videoSrc} type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-black/20" />
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className={`relative w-1/3 h-full flex items-center justify-center z-20 transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
@@ -64,18 +84,24 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="relative w-1/3 h-full overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-black/90 z-10" />
-          <video
-            className="w-full h-full object-cover"
-            autoPlay
-            loop
-            muted
-            playsInline
-          >
-            <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-a-city-at-night-4516/1080p.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-black/30 z-5" />
+        <div className="relative w-1/3 h-full overflow-y-auto overflow-x-hidden scrollbar-hide">
+          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-black/90 z-10 pointer-events-none" />
+          <div className="flex flex-col gap-4 p-4">
+            {rightVideos.map((videoSrc, index) => (
+              <div key={index} className="relative aspect-[9/16] w-full overflow-hidden rounded-sm">
+                <video
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                >
+                  <source src={videoSrc} type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-black/20" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -87,6 +113,16 @@ const Index = () => {
       />
 
       <div className="absolute inset-0 pointer-events-none z-40 shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]" />
+
+      <style>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 };
